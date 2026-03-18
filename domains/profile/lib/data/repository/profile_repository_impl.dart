@@ -19,6 +19,16 @@ class ProfileRepositoryImpl implements ProfileRepository {
     required this.mapper,
   });
 
+  String _extractErrorMessage(DioError error) {
+    final data = error.response?.data;
+    if (data is Map) {
+      final message = data[AppConstants.errorKey.message];
+      if (message != null) return message.toString();
+    }
+    if (data is String && data.trim().isNotEmpty) return data;
+    return error.response?.toString() ?? error.toString();
+  }
+
   @override
   Future<Either<FailureResponse, UserEntity>> getUser() async {
     try {
@@ -31,9 +41,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     } on DioError catch (error) {
       return Left(
         FailureResponse(
-          errorMessage:
-              error.response?.data[AppConstants.errorKey.message]?.toString() ??
-                  error.response.toString(),
+          errorMessage: _extractErrorMessage(error),
         ),
       );
     }
@@ -56,9 +64,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     } on DioError catch (error) {
       return Left(
         FailureResponse(
-          errorMessage:
-              error.response?.data[AppConstants.errorKey.message]?.toString() ??
-                  error.response.toString(),
+          errorMessage: _extractErrorMessage(error),
         ),
       );
     }
@@ -79,9 +85,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     } on DioError catch (error) {
       return Left(
         FailureResponse(
-          errorMessage:
-              error.response?.data[AppConstants.errorKey.message]?.toString() ??
-                  error.response.toString(),
+          errorMessage: _extractErrorMessage(error),
         ),
       );
     }

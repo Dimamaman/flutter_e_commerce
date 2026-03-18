@@ -18,6 +18,16 @@ class PaymentRepositoryImpl implements PaymentRepository {
     required this.mapper,
   });
 
+  String _extractErrorMessage(DioError error) {
+    final data = error.response?.data;
+    if (data is Map) {
+      final message = data[AppConstants.errorKey.message];
+      if (message != null) return message.toString();
+    }
+    if (data is String && data.trim().isNotEmpty) return data;
+    return error.response?.toString() ?? error.toString();
+  }
+
   @override
   Future<Either<FailureResponse, List<PaymentDataEntity>>>
       getAllPaymentMethod() async {
@@ -29,9 +39,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
     } on DioError catch (error) {
       return Left(
         FailureResponse(
-          errorMessage:
-              error.response?.data[AppConstants.errorKey.message]?.toString() ??
-                  error.response.toString(),
+          errorMessage: _extractErrorMessage(error),
         ),
       );
     }
@@ -74,9 +82,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
     } on DioError catch (error) {
       return Left(
         FailureResponse(
-          errorMessage:
-              error.response?.data[AppConstants.errorKey.message]?.toString() ??
-                  error.response.toString(),
+          errorMessage: _extractErrorMessage(error),
         ),
       );
     }
@@ -92,9 +98,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
     } on DioError catch (error) {
       return Left(
         FailureResponse(
-          errorMessage:
-              error.response?.data[AppConstants.errorKey.message]?.toString() ??
-                  error.response.toString(),
+          errorMessage: _extractErrorMessage(error),
           statusCode: error.response?.statusCode,
         ),
       );

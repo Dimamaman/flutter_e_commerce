@@ -4,36 +4,36 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=3.10.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^8.0.3
+  bloc: ^9.2.0
   cached_network_image: ^3.2.1
-  flutter_bloc: ^8.0.1
+  flutter_bloc: ^9.1.1
   flutter_screenutil: ^5.5.3+2
-  flutter_svg: ^1.1.0
-  fluttertoast: ^8.0.9
-  firebase_messaging: ^11.4.1
-  firebase_core: ^1.17.1
+  flutter_svg: ^2.2.4
+  fluttertoast: ^9.0.0
+  firebase_messaging: any
+  firebase_core: any
   dartz: ^0.10.1
   dio: ^4.0.6
   equatable: ^2.0.3
-  get_it: ^7.2.0
-  image_picker: ^0.8.5+3
-  introduction_screen: ^3.0.2
-  intl: ^0.17.0
+  get_it: ^9.2.1
+  image_picker: ^1.2.1
+  introduction_screen: ^4.0.0
+  intl: ^0.20.2
   shared_preferences: ^2.0.15
-  flutter_widget_from_html_core: ^0.8.5+3
-  drift: ^1.7.0
+  flutter_widget_from_html_core: ^0.17.0
+  drift: ^1.7.1
   drift_sqflite: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
