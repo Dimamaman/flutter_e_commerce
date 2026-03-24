@@ -7,28 +7,25 @@ import 'package:onboarding/presentation/bloc/onboarding_bloc/onboarding_state.da
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   final CacheOnBoardingUseCase cacheOnBoardingUseCase;
 
-  OnBoardingCubit({
-    required this.cacheOnBoardingUseCase,
-  }) : super(OnBoardingState(onBoardingState: ViewData.initial()));
+  OnBoardingCubit({required this.cacheOnBoardingUseCase})
+    : super(OnBoardingState(onBoardingState: ViewData.initial()));
 
   void saveOnBoardingStatus() async {
     final result = await cacheOnBoardingUseCase.call(const NoParams());
     result.fold(
       (failure) => emit(
         OnBoardingState(
-          onBoardingState:
-              ViewData.error(message: failure.errorMessage, failure: failure),
+          onBoardingState: ViewData.error(
+            message: failure.errorMessage,
+            failure: failure,
+          ),
         ),
       ),
-      (result) => {
-        emit(
-          OnBoardingState(
-            onBoardingState: ViewData.loaded(
-              data: result,
+      (result) => emit(
+            OnBoardingState(
+              onBoardingState: ViewData.loaded(data: result),
             ),
           ),
-        )
-      },
     );
   }
 }

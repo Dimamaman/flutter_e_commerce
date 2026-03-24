@@ -4,8 +4,8 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
@@ -16,6 +16,7 @@ dependencies:
     path: ../../shared_libraries/component
   dependencies:
     path: ../../shared_libraries/dependencies
+  flutter_bloc: ^9.1.1
   resources:
     path: ../../resources/resources
 
@@ -36,9 +37,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
-  bloc_test: ^9.0.3
-  mocktail: ^0.3.0
+  flutter_lints: ^6.0.0
+  bloc_test: ^10.0.0
+  mocktail: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
