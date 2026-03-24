@@ -33,61 +33,35 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<Either<FailureResponse, UserEntity>> getUser() async {
     try {
       final response = await profileRemoteDataSource.getUser();
-      return Right(
-        mapper.mapUserDataDTOToUserEntity(
-          response.data!,
-        ),
-      );
+      return Right(mapper.mapUserDataDTOToUserEntity(response.data!));
     } on DioError catch (error) {
-      return Left(
-        FailureResponse(
-          errorMessage: _extractErrorMessage(error),
-        ),
-      );
+      return Left(FailureResponse(errorMessage: _extractErrorMessage(error)));
     }
   }
 
   @override
-  Future<Either<FailureResponse, UserEntity>> updateUserData(
-      {required UserRequestEntity userRequestEntity}) async {
+  Future<Either<FailureResponse, UserEntity>> updateUserData({
+    required UserRequestEntity userRequestEntity,
+  }) async {
     try {
       final response = await profileRemoteDataSource.updateUserData(
-        userRequestDto: mapper.mapUserRequestEntityToDTO(
-          userRequestEntity,
-        ),
+        userRequestDto: mapper.mapUserRequestEntityToDTO(userRequestEntity),
       );
-      return Right(
-        mapper.mapUserDataDTOToUserEntity(
-          response.data!,
-        ),
-      );
+      return Right(mapper.mapUserDataDTOToUserEntity(response.data!));
     } on DioError catch (error) {
-      return Left(
-        FailureResponse(
-          errorMessage: _extractErrorMessage(error),
-        ),
-      );
+      return Left(FailureResponse(errorMessage: _extractErrorMessage(error)));
     }
   }
 
   @override
-  Future<Either<FailureResponse, UserEntity>> uploadPhoto(
-      {required File image}) async {
+  Future<Either<FailureResponse, UserEntity>> uploadPhoto({
+    required File image,
+  }) async {
     try {
-      final response = await profileRemoteDataSource.uploadPhoto(
-        image: image,
-      );
-      return Right(
-        mapper.mapUserDataDTOToUserEntity(
-          response.data!,
-        ),
-      );
+      final response = await profileRemoteDataSource.uploadPhoto(image: image);
+      return Right(mapper.mapUserDataDTOToUserEntity(response.data!));
     } on DioError catch (error) {
-      return Left(
-        FailureResponse(
-          errorMessage: _extractErrorMessage(error),
-        ),
-      );
+      return Left(FailureResponse(errorMessage: _extractErrorMessage(error)));
     }
   }
 }
